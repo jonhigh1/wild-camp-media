@@ -52,9 +52,22 @@
            data-sc-act="scrub" data-sc-span="2.6" data-sc-dwell="0.34">
     <div data-sc-stage>
       <img class="sc-stage__poster" src="assets/img/REEL-hero-poster.webp" alt="">
-      <video class="hero-loop" autoplay loop muted playsinline preload="auto" aria-hidden="true">
-        <source src="assets/video/REEL-hero-30.mp4" type="video/mp4">
+      <video class="hero-loop" autoplay loop muted playsinline preload="none" aria-hidden="true">
+        <source type="video/mp4">
       </video>
+      <script>
+        /* source chosen HERE and only here, adjacent to the element: the browser
+           never starts a fetch on the wrong file. no-JS falls back to the poster. */
+        (function () {
+          var v = document.querySelector('.hero-loop');
+          var src = v && v.querySelector('source');
+          if (!src) return;
+          var conn = navigator.connection || {};
+          var mobile = matchMedia('(max-width: 860px)').matches || conn.saveData;
+          src.src = mobile ? 'assets/video/REEL-hero-30-m.mp4' : 'assets/video/REEL-hero-30.mp4';
+          v.load();
+        })();
+      </script>
       <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
       <div class="sc-copy sc-copy--trail hero-copy" data-sc-cue="0 1 0 0.03">
         <h1 class="sc-display sc-display--xl" data-sc-kinetic="lines">The story is already there. I film it.</h1>
