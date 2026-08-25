@@ -1,35 +1,36 @@
-# Contact Modal — Design
+# Contact Modal + Slate Form — Design
 
 Date: 2026-08-25
-Status: approved
+Status: approved (revised — service pages embed inline form, modal is home-only)
 
 ## Goal
 
-One contact form, in a modal, opened by any "Start a project" CTA on the site. Replaces the four inline `#contact` sections on service pages and the mailto CTA in home `#start`.
+One contact form design, the film slate, used two ways: embedded inline in each service page's `#contact` section, and in a modal opened by home's general "Start a project" CTAs.
 
 ## Decisions
 
-- **Submission:** `mailto:` compose now. `FORMSPREE_ENDPOINT = ""` constant at top of `contact-modal.js`. Empty → intercept submit, build mailto URL. Non-empty → plain POST to Formspree, no interception. Later migration = edit one string.
-- **Scope:** modal replaces inline contact sections entirely. Service field records which page opened the modal.
-- **Look:** film-slate modal. Clapper-stripe header, fields as slate rows, submit reads "MARK IT". Clap animation on open, gated by `prefers-reduced-motion`.
+- **Submission:** `mailto:` compose now. `FORMSPREE_ENDPOINT = ""` constant at top of `contact-form.js`. Empty → intercept submit, build mailto URL. Non-empty → plain POST to Formspree, no interception. Later migration = edit one string.
+- **Scope:** service pages keep their `#contact` sections and embed the slate form inline. The modal exists only on home.
+- **Look:** film-slate form. Clapper-stripe header, fields as slate rows, submit reads "MARK IT". Clap animation on modal open, gated by `prefers-reduced-motion`.
 
 ## Files
 
-- `site/js/contact-modal.js` — new. Exposes `WCMContact.init()`. No dependencies. Loaded on all five pages.
-- `css/modal.css` — new. Slate modal styles. Home loads `site.css`, service pages load `pages.css` — no shared sheet exists, so the modal gets its own small file loaded by all five pages.
-- All five pages — CTA markup changes; service pages lose `#contact` sections (and their `data-netlify` forms).
+- `site/js/contact-form.js` — new. Exposes `WCMContact.init()`. No dependencies. Handles submit for all slate forms (inline + modal) and modal open/close on home. Loaded on all five pages.
+- `css/contact.css` — new. Slate form + modal styles, loaded by all five pages (home loads `site.css`, service pages load `pages.css` — no shared sheet exists).
 
-## Markup contract
+## CTA wiring
 
-- Every CTA that should open the modal carries `data-wcm-contact="home|dp|drone|jobsite|events"`.
-- JS intercepts click, `preventDefault`, opens modal, sets hidden `service` field.
-- Anchors keep `href` (`index.html#start`) as no-JS fallback; home mailto CTA becomes a button but "Or write directly: hello@wildcampmedia.com" line stays.
+- Home: nav bar "Start a project", hero CTA, and `#start` CTA open the modal (`data-wcm-contact="home"`). `#start`'s "Or write directly: hello@wildcampmedia.com" mailto line stays as no-JS path.
+- Home service cards (`proj__cta`): link to each service page's `#contact` (e.g. `dp-videographer.html#contact`).
+- Service pages: p-cta stays an anchor to own-page `#contact`. Nav "Start a project" links change from `index.html#start` to own-page `#contact`.
+- Inline forms carry `data-wcm-service="dp|drone|jobsite|events"`; modal sets its hidden `service` field from the opener attribute.
 
-## Modal
+## Form (shared markup: modal on home, inline ×4)
 
-- Native `<dialog>` — focus trap, Escape, `::backdrop` scrim for free. No library.
+- Native `<dialog>` for the modal — focus trap, Escape, `::backdrop` scrim for free. No library.
 - Header: clapper stripe, "WILD CAMP MEDIA · START A PROJECT".
 - Fields as slate rows: NAME (SCENE), EMAIL (CONTACT), PROJECT (NOTES, textarea). Hidden `service`.
+- Inline copies on service pages use the same field markup with page-specific headings (existing h2s stay).
 - Scrim click + visible close button close the modal.
 
 ## Submit flow
