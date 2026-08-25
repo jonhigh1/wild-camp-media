@@ -137,6 +137,14 @@ window.WCMHud = (function () {
   function armHeroReel() {
     var v = document.querySelector('.hero-loop');
     if (!v) return;
+    // mobile/save-data: swap the 720p cut in before anything loads
+    var conn = navigator.connection || {};
+    var small = matchMedia('(max-width: 860px)').matches;
+    if ((small || conn.saveData) && v.querySelector('source')) {
+      v.querySelector('source').src = 'assets/video/REEL-hero-30-m.mp4';
+      v.preload = 'auto';
+      v.load();
+    }
     var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
     if (v.readyState >= 3) tryPlay(); else v.addEventListener('canplay', tryPlay, { once: true });
     ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (ev) {
