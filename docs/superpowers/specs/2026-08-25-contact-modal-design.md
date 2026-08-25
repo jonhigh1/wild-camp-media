@@ -16,7 +16,7 @@ One contact form, in a modal, opened by any "Start a project" CTA on the site. R
 ## Files
 
 - `site/js/contact-modal.js` — new. Exposes `WCMContact.init()`. No dependencies. Loaded on all five pages.
-- `css/pages.css` (or home CSS) — slate modal styles appended.
+- `css/modal.css` — new. Slate modal styles. Home loads `site.css`, service pages load `pages.css` — no shared sheet exists, so the modal gets its own small file loaded by all five pages.
 - All five pages — CTA markup changes; service pages lose `#contact` sections (and their `data-netlify` forms).
 
 ## Markup contract
