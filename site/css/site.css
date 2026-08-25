@@ -120,9 +120,9 @@ body[data-vf-light] .vf__slate-btn:hover { color: rgba(23,20,18,.9); }
 .vf__slate-btn:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 2px; }
 
 @media (max-width: 860px) {
-  .vf__slate-btn { padding: 3px 4px; font-size: 10px; }
+  .vf__slate-btn { padding: 10px 12px; font-size: 10px; min-height: 44px; }
   .vf__slate-btn:not([aria-current="true"]) { display: none; } /* only current scene on phones */
-  .vf__tc { font-size: 11px; }
+  .vf__tc { font-size: 11px; bottom: 32px; }
   .vf__corner { width: 18px; height: 18px; }
   .vf__corner--tl, .vf__corner--tr { top: 62px; }
 }
@@ -264,8 +264,8 @@ body[data-vf-light] .vf__slate-btn:hover { color: rgba(23,20,18,.9); }
     linear-gradient(to left, rgba(10,9,7,.62) 0%, rgba(10,9,7,.5) 42%, rgba(10,9,7,0) 60%),
     /* bottom band: sub, CTA, filmstrip */
     linear-gradient(to top,
-      rgba(10,9,7,.72) 0%, rgba(10,9,7,.58) 20%,
-      rgba(10,9,7,.34) 40%, rgba(10,9,7,.1) 60%, rgba(10,9,7,0) 78%);
+      rgba(10,9,7,.78) 0%, rgba(10,9,7,.62) 20%,
+      rgba(10,9,7,.38) 42%, rgba(10,9,7,.12) 62%, rgba(10,9,7,0) 80%);
 }
 .cutscrim {
   background: linear-gradient(to top, rgba(10,9,7,.85) 0%, rgba(10,9,7,.45) 24%, rgba(10,9,7,0) 55%);
@@ -416,4 +416,21 @@ body[data-vf-light] .vf__slate-btn:hover { color: rgba(23,20,18,.9); }
   .cut { position: static; opacity: 1; }
   .cutstage { display: grid; gap: 2px; }
   .cutlabel { display: none; }
+}
+
+/* mobile hero band: defined AFTER the desktop rule so the cascade order holds.
+   copy fills most of a 390px screen and travels over bright frames during
+   exit, so the density runs almost full-frame */
+@media (max-width: 860px) {
+  .scene-hero .sc-scrim--band {
+    background: linear-gradient(to top,
+      rgba(10,9,7,.9) 0%, rgba(10,9,7,.76) 26%,
+      rgba(10,9,7,.54) 54%, rgba(10,9,7,.24) 76%, rgba(10,9,7,0) 92%);
+  }
+}
+
+/* tap targets: AFTER their base rules so cascade order holds (correctness review P2) */
+@media (max-width: 860px) {
+  .hero-cta { padding: 13px 24px; }
+  .filmstrip__item { padding: 10px 6px; } /* taller touch target around each frame */
 }

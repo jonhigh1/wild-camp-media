@@ -137,6 +137,7 @@ window.WCMHud = (function () {
   function armHeroReel() {
     var v = document.querySelector('.hero-loop');
     if (!v) return;
+    // source selection lives inline next to the <video>; this arm only retries play()
     var tryPlay = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
     if (v.readyState >= 3) tryPlay(); else v.addEventListener('canplay', tryPlay, { once: true });
     ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (ev) {
