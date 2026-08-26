@@ -37,10 +37,16 @@
   outline: 2px solid var(--sc-accent); outline-offset: 2px;
   border-color: var(--sc-accent);
 }
+.slate-form input:-webkit-autofill {
+  -webkit-text-fill-color: #171412;
+  box-shadow: 0 0 0 100px #FFFDF6 inset;
+}
+.slate-form ::placeholder { color: var(--sc-ink-soft); opacity: .8; }
 .slate-form__note { font-size: .85rem; color: var(--sc-ink-soft); }
 
 .slate-form__mark {
   justify-self: start;
+  font-family: var(--sc-font-text);
   font-weight: 500; font-size: 16px;
   color: var(--sc-accent-ink); background: var(--sc-accent);
   border: 0; border-radius: 2px; padding: .7rem 1.4rem;
@@ -54,6 +60,9 @@
   border: 0; border-radius: 4px; padding: 0;
   background: var(--sc-canvas); color: var(--sc-ink);
   max-width: min(92vw, 30rem);
+  --sc-ink: #F5EFE0;
+  --sc-ink-soft: #A79C8C;
+  --sc-accent-ink: #171410;
 }
 .slate-modal::backdrop { background: rgba(14,13,11,.8); }
 .slate-modal .slate-form { padding: 1.6rem; gap: 1rem; }
@@ -64,6 +73,20 @@
   font-size: 14px; line-height: 1; padding: 6px;
 }
 .slate-modal__close:hover { color: var(--sc-ink); }
+.slate-form__mark:focus-visible, .slate-modal__close:focus-visible {
+  outline: 2px solid var(--sc-accent); outline-offset: 2px;
+}
+
+/* cream grounds (service pages): restate ink family for the subtree */
+.p-body .slate-form, .ground-cream .slate-form {
+  --sc-ink: #171412;
+  --sc-ink-soft: #5A5348;
+  --sc-surface: var(--wcm-cream-2);
+  --sc-accent-ink: #F7F1E3;
+}
+.p-body .slate-form__stripe, .ground-cream .slate-form__stripe {
+  background: repeating-linear-gradient(-45deg, var(--wcm-cream-2) 0 14px, #171412 14px 28px);
+}
 
 /* clap: stripe snaps once when the modal opens */
 @keyframes slate-clap {
