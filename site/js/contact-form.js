@@ -51,8 +51,11 @@ if (typeof document !== 'undefined') {
     }
     modal.querySelector('.slate-modal__close')
       .addEventListener('click', () => modal.close());
-    modal.addEventListener('click', (e) => { // scrim click: dialog covers scrim
-      if (e.target === modal) modal.close();
+    let downOn = null;
+    modal.addEventListener('mousedown', (e) => { downOn = e.target; });
+    modal.addEventListener('click', (e) => { // scrim click: require down+up on backdrop
+      if (e.target === modal && downOn === modal) modal.close();
+      downOn = null;
     });
   }
 }
