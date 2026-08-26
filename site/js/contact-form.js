@@ -46,6 +46,8 @@ if (typeof document !== 'undefined') {
       cta.addEventListener('click', (e) => {
         e.preventDefault();
         serviceInput.value = cta.dataset.wcmContact || 'home';
+        const note = modal.querySelector('[data-wcm-note]');
+        if (note) note.hidden = true;
         modal.showModal();
       });
     }
