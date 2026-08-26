@@ -92,24 +92,6 @@
 .p-menu strong { display: block; font-family: var(--sc-font-display); font-weight: 400; font-size: 1.15rem; }
 .p-menu span { color: #5A5348; font-size: .95rem; }
 
-/* contact form */
-.p-form { display: grid; gap: 1rem; max-width: 34rem; }
-.p-form label { font-size: .9rem; font-weight: 500; display: grid; gap: .4rem; }
-.p-form input, .p-form textarea, .p-form select {
-  font: inherit; padding: .7rem .9rem; border: 1px solid #B9AD95;
-  border-radius: 0; background: #FFFDF6; color: #171412;
-}
-.p-form input:focus-visible, .p-form textarea:focus-visible, .p-form select:focus-visible {
-  outline: 2px solid var(--sc-accent); outline-offset: 1px;
-}
-.p-form button {
-  justify-self: start; font: inherit; font-weight: 500; cursor: pointer;
-  background: var(--sc-accent); color: var(--sc-accent-ink);
-  border: 0; border-radius: 999px; padding: 12px 26px;
-}
-.p-form button:hover { filter: brightness(1.08); }
-.p-form button:active { transform: scale(.97); }
-
 /* events list */
 .ev { border-top: 1px solid #D8CDB8; padding: 1.3rem 0; display: grid; gap: .3rem; }
 .ev:last-child { border-bottom: 1px solid #D8CDB8; }
