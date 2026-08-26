@@ -11,3 +11,48 @@ export function buildMailto({ service, name, email, details }) {
   const body = `Name: ${name}\nEmail: ${email}\n\n${details}`;
   return `mailto:hello@wildcampmedia.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
+
+/* ---- wiring (browser only; node --test imports skip this) ---- */
+if (typeof document !== 'undefined') {
+  const modal = document.getElementById('wcm-contact');
+
+  // submit: Formspree if configured, else mailto compose
+  for (const form of document.querySelectorAll('.slate-form')) {
+    if (FORMSPREE_ENDPOINT) {
+      form.action = FORMSPREE_ENDPOINT;
+      form.method = 'POST';
+      continue;
+    }
+    form.addEventListener('submit', (e) => {
+      if (!form.checkValidity()) return; // let the browser show validation UI
+      e.preventDefault();
+      const data = new FormData(form);
+      const url = buildMailto({
+        service: data.get('service') || 'home',
+        name: data.get('name') || '',
+        email: data.get('email') || '',
+        details: data.get('details') || '',
+      });
+      location.href = url;
+      const note = form.querySelector('[data-wcm-note]');
+      if (note) note.hidden = false;
+    });
+  }
+
+  // modal open (home only)
+  if (modal) {
+    const serviceInput = modal.querySelector('input[name="service"]');
+    for (const cta of document.querySelectorAll('[data-wcm-contact]')) {
+      cta.addEventListener('click', (e) => {
+        e.preventDefault();
+        serviceInput.value = cta.dataset.wcmContact || 'home';
+        modal.showModal();
+      });
+    }
+    modal.querySelector('.slate-modal__close')
+      .addEventListener('click', () => modal.close());
+    modal.addEventListener('click', (e) => { // scrim click: dialog covers scrim
+      if (e.target === modal) modal.close();
+    });
+  }
+}
