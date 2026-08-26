@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/contact.css">
 </head>
 <body class="p-page">
 
@@ -22,7 +23,7 @@
     <li><a href="drone.html">Drone</a></li>
     <li><a href="jobsite.html">Jobsite</a></li>
     <li><a href="events.html">Events</a></li>
-    <li><a href="index.html#start">Start a project</a></li>
+    <li><a href="#contact">Start a project</a></li>
   </ul>
 </nav>
 
@@ -122,11 +123,18 @@
 
   <section id="contact">
     <h2>Discuss your jobsite.</h2>
-    <form class="p-form" name="jobsite-contact" method="POST" data-netlify="true" action="mailto:hello@wildcampmedia.com">
-      <label>Name <input type="text" name="name" required autocomplete="name"></label>
-      <label>Email <input type="email" name="email" required autocomplete="email"></label>
-      <label>Company &amp; project <textarea name="details" rows="4" placeholder="Company, project type, location, timing"></textarea></label>
-      <button type="submit">Discuss Your Jobsite</button>
+    <form class="slate-form" data-wcm-service="jobsite">
+      <div class="slate-form__stripe" aria-hidden="true"></div>
+      <p class="slate-form__title">WILD CAMP MEDIA · START A PROJECT</p>
+      <label class="slate-form__row"><span>NAME (SCENE)</span>
+        <input type="text" name="name" required autocomplete="name"></label>
+      <label class="slate-form__row"><span>EMAIL (CONTACT)</span>
+        <input type="email" name="email" required autocomplete="email"></label>
+      <label class="slate-form__row"><span>COMPANY &amp; PROJECT (NOTES)</span>
+        <textarea name="details" rows="4" placeholder="Company, project type, location, timing"></textarea></label>
+      <input type="hidden" name="service" value="jobsite">
+      <button class="slate-form__mark" type="submit">MARK IT</button>
+      <p class="slate-form__note" data-wcm-note hidden>Opened your mail app — press send there.</p>
     </form>
   </section>
 
@@ -140,6 +148,8 @@
   <a href="events.html">Events</a>
   <a href="privacy.html">Privacy</a>
 </footer>
+
+<script type="module" src="js/contact-form.js"></script>
 
 </body>
 </html>

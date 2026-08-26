@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="css/site.css">
 <link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/contact.css">
 </head>
 <body class="p-page">
 
@@ -22,7 +23,7 @@
     <li><a href="drone.html">Drone</a></li>
     <li><a href="jobsite.html">Jobsite</a></li>
     <li><a href="events.html">Events</a></li>
-    <li><a href="index.html#start">Start a project</a></li>
+    <li><a href="#updates">Start a project</a></li>
   </ul>
 </nav>
 
@@ -80,9 +81,14 @@
 
   <section id="updates">
     <h2>Stay posted.</h2>
-    <form class="p-form" name="event-updates" method="POST" data-netlify="true" action="mailto:hello@wildcampmedia.com">
-      <label>Email <input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
-      <button type="submit">Get event updates</button>
+    <form class="slate-form" data-wcm-service="events">
+      <div class="slate-form__stripe" aria-hidden="true"></div>
+      <p class="slate-form__title">WILD CAMP MEDIA · EVENT UPDATES</p>
+      <label class="slate-form__row"><span>EMAIL (CONTACT)</span>
+        <input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
+      <input type="hidden" name="service" value="events">
+      <button class="slate-form__mark" type="submit">MARK IT</button>
+      <p class="slate-form__note" data-wcm-note hidden>Opened your mail app — press send there.</p>
     </form>
   </section>
 
@@ -96,6 +102,8 @@
   <a href="jobsite.html">Jobsite</a>
   <a href="privacy.html">Privacy</a>
 </footer>
+
+<script type="module" src="js/contact-form.js"></script>
 
 </body>
 </html>
