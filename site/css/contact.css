@@ -101,3 +101,6 @@
 
 /* modal form always reads dark, even if the dialog lands inside a .ground-cream subtree */
 .slate-modal .slate-form { --sc-ink: #F5EFE0; --sc-ink-soft: #A79C8C; --sc-accent-ink: #171410; }
+
+/* .cta as <button> on #start */
+button.cta { font-family: inherit; cursor: pointer; border: 0; }

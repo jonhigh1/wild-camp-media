@@ -15,6 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="scrollcraft.css">
 <link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/contact.css">
 </head>
 <body>
 
@@ -33,7 +34,7 @@
     <img class="bar__logo" src="assets/img/logo.webp" alt="Wild Camp Media" width="40" height="40">
     <span class="bar__rec"><i class="bar__rec-dot"></i>REC</span>
   </a>
-  <a class="bar__cta" href="#start">Start a project</a>
+  <a class="bar__cta" href="#start" data-wcm-contact>Start a project</a>
 </header>
 <div class="vf__tc" aria-hidden="true"><span data-vf-tc>00:00:00:00</span></div>
 <nav class="vf__slate" aria-label="Scenes">
@@ -72,7 +73,7 @@
       <div class="sc-copy sc-copy--trail hero-copy" data-sc-cue="0 1 0 0.03">
         <h1 class="sc-display sc-display--xl" data-sc-kinetic="lines">The story is already there. I film it.</h1>
         <p class="hero-sub">Twenty years of camera for television, documentary, corporate, and commercial work: the brands that brew, build, and host.</p>
-        <a class="hero-cta" href="#start">Start a project</a>
+        <a class="hero-cta" href="#start" data-wcm-contact>Start a project</a>
       </div>
       <nav class="filmstrip" aria-label="Services">
         <a class="filmstrip__item" href="dp-videographer.html">
@@ -245,7 +246,7 @@
           </div>
           <div class="proj__col proj__col--meta">
             <p class="proj__desc">Same shooter, your site, your story. Tell me what needs documenting.</p>
-            <a class="proj__cta" href="#start">Start a project</a>
+            <a class="proj__cta" href="#start" data-wcm-contact>Start a project</a>
           </div>
         </article>
       </div>
@@ -263,7 +264,7 @@
     <div data-sc-stage class="close">
       <div class="close__inner">
         <h2 class="sc-display sc-display--lg" data-sc-cue="0.06" data-sc-kinetic="lines">Got work that deserves a camera?</h2>
-        <a class="cta" href="mailto:hello@wildcampmedia.com" data-sc-magnet="0.26" data-sc-cue="0.1" data-sc-rise="0">Start a project</a>
+        <button class="cta" data-wcm-contact data-sc-cue="0.1" data-sc-rise="0">Start a project</button>
         <p class="close__line" data-sc-cue="0.14">Or write directly: hello@wildcampmedia.com [TODO]</p>
       </div>
       <footer class="foot">
@@ -279,5 +280,22 @@
 <script src="scrollcraft.js"></script>
 <script src="js/hud.js"></script>
 <script>ScrollCraft.mount(document.body); WCMHud.init();</script>
+<dialog class="slate-modal" id="wcm-contact" aria-labelledby="wcm-contact-title">
+  <form class="slate-form" data-wcm-service="home" method="POST" action="mailto:hello@wildcampmedia.com">
+    <button class="slate-modal__close" type="button" aria-label="Close">✕</button>
+    <div class="slate-form__stripe" aria-hidden="true"></div>
+    <p class="slate-form__title" id="wcm-contact-title">WILD CAMP MEDIA · START A PROJECT</p>
+    <label class="slate-form__row"><span>NAME (SCENE)</span>
+      <input type="text" name="name" required autocomplete="name"></label>
+    <label class="slate-form__row"><span>EMAIL (CONTACT)</span>
+      <input type="email" name="email" required autocomplete="email"></label>
+    <label class="slate-form__row"><span>PROJECT (NOTES)</span>
+      <textarea name="details" rows="4" placeholder="What needs a camera? Where, when, roughly how big"></textarea></label>
+    <input type="hidden" name="service" value="home">
+    <button class="slate-form__mark" type="submit">MARK IT</button>
+    <p class="slate-form__note" data-wcm-note hidden>Opened your mail app — press send there.</p>
+  </form>
+</dialog>
+<script type="module" src="js/contact-form.js"></script>
 </body>
 </html>
