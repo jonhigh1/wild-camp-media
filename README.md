@@ -15,7 +15,9 @@ site/                    ← the deliverable (static, no build step)
 ├── scrollcraft.js/.css  ← motion engine (do not edit per-project)
 ├── css/site.css         ← home theme
 ├── css/pages.css        ← service page system
+├── css/contact.css      ← slate contact form + modal (all pages)
 ├── js/hud.js            ← signature move: viewfinder HUD + montage cuts
+├── js/contact-form.js   ← slate forms: inline ×4 service pages, modal on home
 └── assets/              ← img/, video/, incoming/ (raw drops)
 research/                ← 12k-site-builder deliverables (01-03 done)
 builds/home/BRIEF.md     ← scrollcraft brief: journey, feeling curve, score
@@ -48,8 +50,8 @@ walks through frame, 24-30fps target before encode.
 ## TODO before launch (all marked [TODO] in pages)
 
 - Name: Chris McDaniel. Bios written (DP, jobsite, events host). Region: Greensboro, NC.
-- Real email + form endpoint (forms have `data-netlify`; on Netlify they just
-  work, otherwise use Formspree and change `action`)
+- Real form endpoint: forms compose a `mailto:` today; to go real-POST, paste
+  a Formspree endpoint into `FORMSPREE_ENDPOINT` in `site/js/contact-form.js`
 - Client list, selected work galleries, testimonials (real only — no invented
   quotes or numbers)
 - Pricing for the 5 jobsite engagement types (competitor analysis: pricing
@@ -60,9 +62,10 @@ walks through frame, 24-30fps target before encode.
 
 ## Deploy
 
-Any static host. Netlify recommended (forms already wired):
-drag `site/` to app.netlify.com, or connect the repo with publish
-directory `site/`.
+Any static host; drag `site/` to app.netlify.com, or connect the repo
+with publish directory `site/`. Forms are mailto-compose until a
+Formspree endpoint is set (see TODO above) — no host-side form
+handling required either way.
 
 ## Design system
 
